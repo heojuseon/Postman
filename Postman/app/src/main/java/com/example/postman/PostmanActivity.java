@@ -1,5 +1,6 @@
 package com.example.postman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.postman.Data.TrainingData;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -23,11 +25,13 @@ import java.util.Map;
 public class PostmanActivity extends AppCompatActivity {
 
     static RequestQueue requestQueue;
-    static RequestQueue requestQueue2;
+//    static RequestQueue requestQueue2;
 
 
     Button lgnbtn;
     Button trnbtn;
+
+
 
 
     @Override
@@ -36,12 +40,14 @@ public class PostmanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
+
+
         lgnbtn = findViewById(R.id.login);
         lgnbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                makeRequest();
+//                makeRequest();
 
             }
         });
@@ -51,6 +57,10 @@ public class PostmanActivity extends AppCompatActivity {
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
 
+        //버튼 입력 안받고 바로 출력
+        makeRequest();
+
+
 
         ///////////////////////////////////////////////////////////////////////////////////
 
@@ -59,15 +69,21 @@ public class PostmanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                trainRequest();
+//                trainRequest();
+
+                Intent intent = new Intent(getApplicationContext(), TrainingActivity.class);
+                startActivity(intent);
 
             }
         });
 
-        //RequestQueue 객체생성
-        if (requestQueue2 == null) {
-            requestQueue2 = Volley.newRequestQueue(getApplicationContext());
-        }
+//        //RequestQueue 객체생성
+//        if (requestQueue2 == null) {
+//            requestQueue2 = Volley.newRequestQueue(getApplicationContext());
+//        }
+//
+//        //버튼 입력 안받고 바로 출력
+//        trainRequest();
 
     }
 
@@ -120,43 +136,43 @@ public class PostmanActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    private void trainRequest() {
-        //GET
-        String url = "https://34680239-27cc-40d0-b8e3-bf9b6aa469bc.mock.pstmn.io/example";
-
-        StringRequest request = new StringRequest(  //요청을 보내기 위한 StringRequest 객체 생성
-                Request.Method.GET,
-                url,
-                new Response.Listener<String>() {   //응답을 잘 받았을 때 이 메소드가 자동으로 호출
-
-                    @Override
-                    public void onResponse(String response2) {
-                        println2("response -> " + response2);
-
-                        trainingResponse(response2);
-                    }
-                },
-                new Response.ErrorListener() {  //에러 발생시 호출될 리스너 객체
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        println2("error -> " + error.getMessage());
-                    }
-                }
-        ) {
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                return params;
-            }
-        };
-
-        request.setShouldCache(false);  //이전 결과 있어도 새로 요청하여 응답을 보여준다.
-        requestQueue2.add(request);  //요청 큐의 add메소드
-        println2("요청 보냄.");
-
-    }
+//    private void trainRequest() {
+//        //GET
+//        String url = "https://34680239-27cc-40d0-b8e3-bf9b6aa469bc.mock.pstmn.io/example";
+//
+//        StringRequest request = new StringRequest(  //요청을 보내기 위한 StringRequest 객체 생성
+//                Request.Method.GET,
+//                url,
+//                new Response.Listener<String>() {   //응답을 잘 받았을 때 이 메소드가 자동으로 호출
+//
+//                    @Override
+//                    public void onResponse(String response2) {
+//                        println2("response -> " + response2);
+//
+//                        trainingResponse(response2);
+//                    }
+//                },
+//                new Response.ErrorListener() {  //에러 발생시 호출될 리스너 객체
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        println2("error -> " + error.getMessage());
+//                    }
+//                }
+//        ) {
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//
+//                return params;
+//            }
+//        };
+//
+//        request.setShouldCache(false);  //이전 결과 있어도 새로 요청하여 응답을 보여준다.
+//        requestQueue2.add(request);  //요청 큐의 add메소드
+//        println2("요청 보냄.");
+//
+//    }
 
 
     private void println(String data) {
@@ -165,9 +181,9 @@ public class PostmanActivity extends AppCompatActivity {
 
 
 
-    private void println2(String data2) {
-        Log.d("Training", data2);
-    }
+//    private void println2(String data2) {
+//        Log.d("TrainingData", data2);
+//    }
 
 
 
@@ -188,13 +204,40 @@ public class PostmanActivity extends AppCompatActivity {
 
 
 
-    private void trainingResponse(String response2) {
-        Gson gson = new Gson();
-        TrainingList trainingList = gson.fromJson(response2, TrainingList.class); //JSON문자열을 TrainingList list 객체로 변환
-
-
-
-    }
+//    private void trainingResponse(String response2) {
+//        Gson gson = new Gson();
+//        TrainingList trainingList = gson.fromJson(response2, TrainingList.class); //JSON문자열을 TrainingList list 객체로 변환
+//
+////       TrainingData tdo = trainingList.functional.get(0);
+////
+////       TrainingData tdo2 = trainingList.powerlifting.get(0);
+//
+//       for (int i = 0; i < trainingList.functional.size(); i++){
+//
+//           TrainingData tdo = trainingList.functional.get(i);
+//
+//           println2(tdo.id);
+//           println2(tdo.name);
+//           println2(tdo.lv);
+//           println2(tdo.week);
+//           println2(tdo.msg);
+//
+//       }
+//
+//
+////       for (int i = 0; i < trainingList.powerlifting.size(); i++){
+////
+////            TrainingData tdo2 = trainingList.powerlifting.get(i);
+////
+////            println2(tdo2.id);
+////            println2(tdo2.name);
+////            println2(tdo2.lv);
+////            println2(tdo2.week);
+////            println2(tdo2.msg);
+////
+////       }
+//
+//    }
 
 
 }

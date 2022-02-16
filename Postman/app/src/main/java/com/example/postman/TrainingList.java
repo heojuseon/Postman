@@ -1,11 +1,14 @@
 package com.example.postman;
 
 
+import com.example.postman.Data.PowerliftingData;
+import com.example.postman.Data.TrainingData;
+
 import java.util.ArrayList;
 
 public class TrainingList {
 
-    public ArrayList<Training> functional = new ArrayList<Training>();
-    public ArrayList<Training> powerlifting = new ArrayList<Training>();
+    public ArrayList<TrainingData> functional = new ArrayList<TrainingData>();
+    public ArrayList<PowerliftingData> powerlifting = new ArrayList<PowerliftingData>();
 
 }
