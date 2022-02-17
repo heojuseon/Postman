@@ -7,7 +7,6 @@ public class PowerliftingData {
     public String lv;
     public String week;
     public String msg;
-
     int type;
 
     public PowerliftingData(String id, String name, String lv, String week, String msg, int type) {

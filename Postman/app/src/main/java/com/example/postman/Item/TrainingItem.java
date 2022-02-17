@@ -3,7 +3,6 @@ package com.example.postman.Item;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.postman.Data.TrainingData;
@@ -18,7 +17,7 @@ public class TrainingItem extends RecyclerView.ViewHolder{
     TextView textView5;
 
 
-    public TrainingItem(@NonNull View itemView) {
+    public TrainingItem(View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.id);
         textView2 = itemView.findViewById(R.id.name);

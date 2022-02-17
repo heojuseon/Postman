@@ -18,30 +18,47 @@ public class TrainingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     ArrayList<Object> items = new ArrayList();
 
+    //여기 부분 수정함
+    public static final int VIEW_TYPE_A = 0;
+    public static final int VIEW_TYPE_B = 1;
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+//        if (viewType == VIEW_TYPE_A){
+//
+//            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//            View itemView = inflater.inflate(R.layout.functional, parent, false);
+//
+//            return new TrainingItem(itemView);
+//
+//        }else {
+//            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//            View itemView = inflater.inflate(R.layout.powerlifting, parent, false);
+//
+//            return new PowerliftingItem(itemView);
+//        }
 
-        if (viewType == 0){
+
+        if (viewType == VIEW_TYPE_A){
 
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View itemView = inflater.inflate(R.layout.functional, parent, false);
 
             return new TrainingItem(itemView);
 
-        }else if (viewType == 1){
+//        }else if (viewType == VIEW_TYPE_B){
+//            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//            View itemView = inflater.inflate(R.layout.powerlifting, parent, false);
+//
+//            return new PowerliftingItem(itemView);
+
+        }else {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View itemView = inflater.inflate(R.layout.powerlifting, parent, false);
 
             return new PowerliftingItem(itemView);
-
-        }else {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View itemView = inflater.inflate(R.layout.functional, parent, false);
-
-            return new TrainingItem(itemView);
         }
     }
 
@@ -52,17 +69,20 @@ public class TrainingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         Object obj = items.get(position);
 
         if (obj instanceof TrainingData){
+
             TrainingData trainingData = (TrainingData) obj;
             TrainingItem trainingItem = (TrainingItem) holder;
             trainingItem.setItem(trainingData);
+
         }
 
         else if (obj instanceof PowerliftingData){
+
             PowerliftingData powerliftingData = (PowerliftingData) obj;
             PowerliftingItem powerliftingItem = (PowerliftingItem) holder;
             powerliftingItem.setItem(powerliftingData);
-        }
 
+        }
 
     }
 
@@ -75,21 +95,29 @@ public class TrainingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemViewType(int position) {
 
 
-
         Object obj = items.get(position);
+
         if (obj instanceof TrainingData){
 
-            TrainingData tda = (TrainingData) obj;
-            return  tda.getType();
+            TrainingData trainingData = (TrainingData) obj;
+
+            trainingData.getType(); //여기 부분 수정함
+
+            return VIEW_TYPE_A;
 
         }else if (obj instanceof PowerliftingData){
 
-            PowerliftingData pwl = (PowerliftingData) obj;
-            return  pwl.getType();
+            PowerliftingData powerliftingData = (PowerliftingData) obj;
+
+            powerliftingData.getType();//여기 부분 수정함
+
+            return VIEW_TYPE_B;
+
         }
 
-        return 0;
+        return VIEW_TYPE_A;
     }
+
 
     public void setItems(ArrayList<Object> items){
         this.items = items;
